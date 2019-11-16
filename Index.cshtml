@@ -31,7 +31,9 @@
             var lat = 40.416;
             var long = -3.704; //default to madrid
 
-            //TODO ERROR HERE
+            
+
+            //Try to change the default location by geolocation
             if (navigator.geolocation) {
                 // geolocation is available
                 navigator.geolocation.getCurrentPosition(
@@ -42,11 +44,11 @@
 
                     }
                 );
-            } 
+            }
 
             //if geolocation not supported or denied, defaults to lat, long of madrid :)
-            mymap = L.map('mapid').setView([lat, long], 15); //centered around mardid
-
+            mymap = L.map('mapid').setView([lat, long], 5); //centered around mardid
+            
             //must note contributions! TODO fix that this is out of frame by filling screen on some laptops :((((	
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
                 maxZoom: 18,
