@@ -29,7 +29,7 @@
             var myPins = new Array();
             var pinList;
             var lat = 40.416;
-            var long = -3.704; //default to madrid
+            var long = 3.704; //default to madrid
 
             
 
@@ -39,8 +39,8 @@
                 navigator.geolocation.getCurrentPosition(
                     function(position) {
 
-                    var lat = position.coords.latitude;
-                    var long = position.coords.longitude;
+                    lat = position.coords.latitude;
+                    long = position.coords.longitude;
 
                     }
                 );
