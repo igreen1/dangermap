@@ -1,6 +1,6 @@
 
-var mymap;
-var myPins = new Array();
+            var mymap;
+            var myPins = new Array();
             var pinList;
             var lat = 40.416;
             var long = -3.704; //default to madrid
@@ -43,7 +43,7 @@ var myPins = new Array();
             var popup = L.popup();
 
 
-            function storeLocation(latlang, goodBad, comment) {
+            function storeLocation(latlang, goodBad) {
                 
 
                 //make data organized? in server implementation
@@ -51,7 +51,7 @@ var myPins = new Array();
                 //  lat and long of the event information
                 //  whether it was a good experience or a bad one
                 //  what people have to say about it
-                var data = "latlng="+latlang+"&goodOrBad="+goodBad+"&comment="+comment;
+                var data = "latlng="+latlang+"&goodOrBad="+goodBad;
 
                 var xhr = new XMLHttpRequest();
 
