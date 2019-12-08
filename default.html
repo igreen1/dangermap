@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <!-- This is all the leaflet stuff for the map API -->
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+
+    
+
+</head>
+
+<body> 
+
+    <style>
+        #mapId{
+            height: 98vh;
+            width: 98vw; 
+        }
+    </style>
+
+    <div id = 'mapid'></div>
+
+    <script>
+    
+        //the meat of the entire thing
+    
+        var map;
+        //the data retrieved from server
+        var myPins = new Array();
+        //the original center of map
+        var lat = 40.416;
+        var lang = -3.704;
+        //original zoom level (variavle updated onZoomChange)
+        var zoom = 15;
+        var maxZoom = 18;
+
+        //setup map
+        map = L.map('mapid').setView([lat,lang], zoom);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                maxZoom: maxZoom,
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: 'mapbox.streets'
+            }).addTo(map);
+
+        //setup icons / popups :)
+
+        var goodIcon = L.Icon.extend({
+
+            iconUrl: 'good_marker.png',
+            iconSize:       [30,30],
+            shadowSize:     [50,64],
+            iconAnchor:     [15,15],
+            popupAnchor:    [-3,-76]
+
+        });
+
+        var badIcon = L.Icon.extend({
+
+            iconUrl: 'bad_market.png',
+            iconSize:       [30,30],
+            shadowSize:     [50,64],
+            iconAnchor:     [15,15],
+            popupAnchor:    [-3,-76]
+
+        });
+
+        function createButton(label, container, latlng) {
+                var btn = L.DomUtil.create('button', '', container);
+                btn.setAttribute('type', 'button');
+                btn.innerHTML = label;
+                btn.latlng = latlng;
+                return btn;
+        }
+
+        function createTypeField(container)
+        {
+            var text = L.DomUtil.create("INPUT", container);
+            text.setAttribute('type', 'text');
+            return text;
+
+        }
+
+        var container = L.DomUtil.create('div');
+        var popup = L.popup();
+
+        //setup geoJSON
+        var badLayer = L.geoJSON().addTo(map);
+        var goodLayer = L.geoJSON().addTo(map);
+
+
+
+        //TODO:
+        //  on zoom change
+        //  geoJSON math
+        //  geolocation
+
+        console.log("End of startup");
+
+    </script>
+
+</body>
+
+</html>
